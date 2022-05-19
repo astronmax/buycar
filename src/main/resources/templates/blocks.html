@@ -1,0 +1,96 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+
+<!-- Header -->
+<div th:fragment="header" class="p-3 bg-dark text-white">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/about" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <img src="/img/logo.svg" alt="BuyCar" class="bi me-2" width="40" height="32">
+            </a>
+
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="/" class="nav-link px-2"
+                        th:classappend="${isCatalog} ? text-secondary : text-white">Каталог</a></li>
+                <li><a href="/offer" class="nav-link px-2"
+                        th:classappend="${isOffer} ? text-secondary : text-white">Оформить
+                        заявку</a></li>
+                <li><a href="/tradein" class="nav-link px-2"
+                        th:classappend="${isTradein} ? text-secondary : text-white">Trade-In</a></li>
+                <li><a href="/reviews" class="nav-link px-2"
+                        th:classappend="${isReviews} ? text-secondary : text-white">Отзывы</a></li>
+                <li><a href="/about" class="nav-link px-2" th:classappend="${isAbout} ? text-secondary : text-white">О
+                        Нас</a></li>
+            </ul>
+
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 text-end" id="searchForm" action="/search"
+                method="get">
+                <input type="text" class="form-control form-control-dark" placeholder="Поиск..." aria-label="Поиск"
+                    name="carName">
+            </form>
+
+            <div class="text-end">
+                <button type="submit" class="btn btn-outline-light me-2" form="searchForm">Найти</button>
+                <a th:href="${isAdmin} ? '/' : '/login'">
+                    <button type="button" class="btn me-2 btn-warning"
+                        th:text="${isAdmin} ? 'Выйти' : 'Войти'"></button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- --- -->
+
+<!-- Footer -->
+<p th:fragment="footer" class="mt-5 mb-1 text-muted text-center">© Maxim A. Jurankov 2022</p>
+<!-- --- -->
+
+<!-- Cars List -->
+<div th:fragment="carsList" class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    <div th:each="car : ${cars}">
+        <img th:src="'/img/' + ${car.image}" style="max-width: 100%;">
+        <h3 th:text="${car.name}" class="mt-2"></h3>
+        <p class="pt-0 pb-0 mt-0 mb-0">Номер: <span th:text="${car.id}"></span></p>
+        <p class="pt-0 pb-0 mt-0 mb-0">Цена: <span th:text="${car.price} + '₽'"></span></p>
+        <p class="pt-0 pb-0 mt-0 mb-0">Тип: <span th:text="${car.type}"></span></p>
+        <p class="pt-0 mt-0">Цвета: <span th:text="${car.colors}"></span></p>
+        <form action="/offer" method="get">
+            <input th:value="${car.name}" style="display: none;" type="text" id="car" name="car">
+            <button type="submit" class="btn btn-primary">Оформить заявку</button>
+        </form>
+    </div>
+</div>
+<!-- --- -->
+
+<!-- Offers List -->
+<div th:fragment="offersList" class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+    <div th:each="offer : ${offers}">
+        <h3 class="mt-2">Номер: <span th:text="${offer.id}"></span></h3>
+        <p class="pt-0 pb-0 mt-0 mb-0">Имя: <span th:text="${offer.name}"></span></p>
+        <p class="pt-0 pb-0 mt-0 mb-0">Телефон: <span th:text="${offer.phone}"></span></p>
+        <p class="pt-0 pb-0 mt-0 mb-0">Автомобиль: <span th:text="${offer.car}"></span></p>
+        <p class="pt-0 pb-0 mt-0 mb-0">Trade-In: <span th:text="${offer.tradein}"></span></p>
+        <p class="pt-0 mt-0">Дата: <span th:text="${offer.date}"></span></p>
+        <form action="/admin/offers/delete" method="post">
+            <input th:value="${offer.id}" style="display: none;" type="text" id="id" name="id">
+            <button type="submit" class="btn btn-danger">Удалить</button>
+        </form>
+    </div>
+</div>
+<!-- --- -->
+
+<!-- Reviews List -->
+<div th:fragment="reviewsList" class="column">
+    <div th:each="review : ${reviews}" class="feature col mb-5">
+        <h3 th:text="${review.name}"></h3>
+        <p class="pt-0 pb-0 mt-0 mb-0">Номер: <span th:text="${review.id}"></span></p>
+        <p th:text="${review.date}" class="pt-0 pb-0 mt-0 mb-2"></p>
+        <p th:text="${review.body}"></p>
+    </div>
+</div>
+<!-- --- -->
+
+</html>

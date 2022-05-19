@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Каталог | BuyCar</title>
+</head>
+<body>
+    <head th:insert="blocks::header"></head>
+    
+    <div class="container px-4 py-5" id="featured-3">
+        <h1 class="pb-2 border-bottom">Каталог</h1>
+        <div th:insert="blocks::carsList"></div>
+    </div>
+
+    <footer th:insert="blocks::footer" class="text-center"></footer>
+</body>
+</html>

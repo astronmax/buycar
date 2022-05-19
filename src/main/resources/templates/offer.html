@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+
+<body>
+    <header th:insert="blocks::header"></header>
+    <div th:if="${success}" class="alert alert-success" role="alert">
+        Заявка оформлена. Ожидайте звонка менеджера.
+    </div>
+    <div th:if="${error}" class="alert alert-danger" role="alert">
+        Заполните поля.
+    </div>
+
+    <h2 th:if="${isOffer}" class="text-center mt-3">Оформить заявку</h2>
+    <h2 th:if="${isTradein}" class="text-center mt-3">Trade-In заявка</h2>
+    <section class="container d-flex justify-content-center h-100">
+        <form action="/offer/add" method="post" class="w-100">
+            <div th:if="${isOffer}" class="mb-3 mt-3">
+                <input th:value="${car}" type="text" class="form-control" id="car" placeholder="Автомобиль"
+                    name="car">
+            </div>
+            <div class="mb-3 mt-3">
+                <input type="text" class="form-control" id="name" placeholder="Имя" name="name">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="phone" placeholder="Телефон" name="phone">
+            </div>
+            <div th:if="${isTradein}" class="mb-3">
+                <input type="text" class="form-control" id="phone" placeholder="Ваш автомобиль" name="tradein">
+            </div>
+            <button type="submit" class="btn btn-primary">Оформить заявку</button>
+        </form>
+    </section>
+
+    <footer th:insert="blocks::footer" class="text-center"></footer>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Отзывы | BuyCar</title>
+</head>
+<body>
+    <head th:insert="blocks::header"></head>
+
+    <div th:if="${error}" class="alert alert-danger" role="alert" th:text="${errorText}"></div>
+    <div th:if="${success}" class="alert alert-success" role="alert">
+        Отзыв добавлен.
+    </div>
+    
+    <h2 class="text-center mt-3 border-bottom">Отзывы</h2>
+    <div class="container ml-3">
+        <div th:insert="blocks::reviewsList"></div>
+    </div>
+
+    <h2 class="text-center mt-3 border-bottom">Оставить отзыв</h2>
+    <section class="container d-flex justify-content-center h-100">
+        <form action="/reviews/add" method="post" class="w-100" id="reviewForm">
+            <div class="mb-3 mt-3">
+                <input type="text" class="form-control" id="name" placeholder="Название" name="name">
+            </div>
+            <div class="mb-3 mt-3">
+                <textarea class = "form-control" rows="5" name="body" placeholder="Отзыв" form="reviewForm"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        </form>
+    </section>
+
+    <footer th:insert="blocks::footer" class="text-center"></footer>
+</body>
+</html>

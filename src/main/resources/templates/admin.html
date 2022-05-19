@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>Admin | BuyCar</title>
+</head>
+
+<body>
+    <header th:insert="blocks::header"></header>
+
+    <div th:if="${error}" class="alert alert-danger" role="alert">
+        Заполните поля.
+    </div>
+    <div th:if="${success}" class="alert alert-success" role="alert">
+        Успешно.
+    </div>
+
+    <h2 class="text-center mt-3 border-bottom">Добавить автомобиль</h2>
+    <section class="container d-flex justify-content-center h-100">
+        <form action="/admin/cars/add" method="post" class="w-100">
+            <div class="mb-3 mt-3">
+                <input type="text" class="form-control" id="name" placeholder="Название" name="name">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="price" placeholder="Цена" name="price">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="type" placeholder="Тип" name="type">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="type" placeholder="Цвета" name="colors">
+            </div>
+            <div class="mb-3">
+                <input type="text" class="form-control" id="image" placeholder="Изображение" name="image">
+            </div>
+            <button type="submit" class="btn btn-primary">Добавить</button>
+        </form>
+    </section>
+
+    <h2 class="text-center mt-3 border-bottom">Удалить автомобиль</h2>
+    <section class="container d-flex justify-content-center h-100">
+        <form action="/admin/cars/delete" method="post" class="w-100">
+            <div class="mb-3 mt-3">
+                <input type="text" class="form-control" id="id" placeholder="Номер" name="id">
+            </div>
+            <button type="submit" class="btn btn-danger">Удалить</button>
+        </form>
+    </section>
+
+    <h2 class="text-center mt-3 border-bottom">Удалить отзыв</h2>
+    <section class="container d-flex justify-content-center h-100">
+        <form action="/admin/reviews/delete" method="post" class="w-100">
+            <div class="mb-3 mt-3">
+                <input type="text" class="form-control" id="id" placeholder="Номер" name="id">
+            </div>
+            <button type="submit" class="btn btn-danger">Удалить</button>
+        </form>
+    </section>
+
+    <div class="container px-4 py-5">
+        <h1 class="pb-2 border-bottom">Заявки</h1>
+        <div th:insert="blocks::offersList"></div>
+    </div>
+
+    <footer th:insert="blocks::footer" class="text-center"></footer>
+</body>
+
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <title>О Нас | BuyCar</title>
+</head>
+
+<body>
+    <header th:insert="blocks::header"></header>
+    
+    <main class="container text-center h-100 px-3 mt-5">
+        <h1>Автосалон BuyCar</h1>
+        <p class="lead">Данный сайт является курсовой работой студента РТУ МИРЭА Журанкова М. А. группы ИКБО-24-20 за 4
+            семестр по дисциплине "Шаблоны программных платформ языка Java"</p>
+        <a href="https://github.com/astronmax/buycar">
+            <img src="/img/github.png">
+        </a>
+    </main>
+
+    <footer th:insert="blocks::footer" class="text-center"></footer>
+</body>
+
+</html>
